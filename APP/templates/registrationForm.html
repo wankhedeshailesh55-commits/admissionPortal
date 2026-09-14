@@ -1,0 +1,173 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Student Registration | Admission Portal
+{% endblock %}
+
+<!-- ================= REGISTRATION FORM ================= -->
+
+{% block content %}
+<div class="container mt-5 mb-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>Student Registration</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="/admission/viewRegisteringUser/" method="POST">
+                        {% csrf_token %}
+
+                        <!-- Name -->
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Enter your full name" 
+                                   name="userName">
+                        </div>
+
+
+                        <!-- Email -->
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   class="form-control"
+                                   placeholder="Enter your email" 
+                                   name="userEmail">
+                        </div>
+
+
+                        <!-- Mobile -->
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Mobile Number
+                            </label>
+
+                            <input type="tel"
+                                   class="form-control"
+                                   placeholder="Enter your mobile number" 
+                                   name="userMobile">
+                        </div>
+
+
+                        <!-- Date of Birth -->
+
+                        <div class="mb-3">
+                            <label class="form-label">
+                                Date of Birth
+                            </label>
+
+                            <input type="date"
+                                   class="form-control" 
+                                   name="userBirth">
+                        </div>
+
+
+                        <!-- Gender -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Gender
+                            </label>
+
+                            <select class="form-select" name="gender">
+
+                                <option selected>
+                                    Select Gender
+                                </option>
+
+                                <option value="male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Course -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Select Course
+                            </label>
+
+                            <select class="form-select" name="course">
+
+                                <option selected>
+                                    Select Course
+                                </option>
+
+                                <option value="bca">BCA</option>
+                                <option value="bba">BBA</option>
+                                <option value="bsc">B.Sc</option>
+                                <option value="MCA">MCA</option>
+                                <option value="mba">MBA</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Address -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Address
+                            </label>
+
+                            <textarea class="form-control"
+                                      rows="3"
+                                      placeholder="Enter your address" name="address"></textarea>
+
+                        </div>
+
+
+                        <!-- Submit -->
+
+                        <div class="text-center">
+
+                            <button type="submit"
+                                    class="btn btn-primary px-5">
+                                Register
+                            </button>
+
+                            <button type="reset"
+                                    class="btn btn-secondary px-4">
+                                Reset
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,718 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home | Admission Portal
+{% endblock %}
+
+{% block content %}
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero-section position-relative text-white">
+
+    <div class="hero-overlay"></div>
+
+    <div class="container position-relative py-5">
+
+        <div class="row align-items-center min-vh-75">
+
+            <div class="col-lg-7 py-5">
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show"
+                             role="alert">
+                            {{ message }}
+
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="alert">
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <span class="badge bg-primary px-3 py-2 mb-3">
+                    <i class="fa-solid fa-graduation-cap me-1"></i>
+                    Welcome to Admission Portal
+                </span>
+
+                <h1 class="display-3 fw-bold mb-4">
+                    Start Your Journey
+                    <span class="text-primary">Toward Success</span>
+                </h1>
+
+                <p class="lead mb-4">
+                    A simple and secure platform to manage student admissions,
+                    explore courses, and take the first step toward your
+                    academic future.
+                </p>
+
+                {% if user.is_authenticated %}
+
+                    <div class="d-flex flex-wrap gap-3">
+
+                        <a href="/admission/register/"
+                           class="btn btn-primary btn-lg px-4">
+                            <i class="fa-solid fa-user-plus me-2"></i>
+                            Register Now
+                        </a>
+
+                        {% if user.is_superuser or is_admission_staff %}
+
+                            <a href="/admission/viewAllUsers/"
+                               class="btn btn-outline-light btn-lg px-4">
+                                <i class="fa-solid fa-users me-2"></i>
+                                View Students
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                {% else %}
+
+                    <div class="d-flex flex-wrap gap-3">
+
+                        <a href="/admission/signUpForm/"
+                           class="btn btn-primary btn-lg px-4">
+                            <i class="fa-solid fa-user-plus me-2"></i>
+                            Get Started
+                        </a>
+
+                        <a href="/admission/loginForm/"
+                           class="btn btn-outline-light btn-lg px-4">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>
+                            Login
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <div class="col-lg-5 text-center d-none d-lg-block">
+
+                <div class="hero-icon-card">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                    <h3 class="mt-3 fw-bold">
+                        Your Future Starts Here
+                    </h3>
+
+                    <p class="mb-0">
+                        Learn. Grow. Succeed.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES SECTION ================= -->
+
+<section class="py-5 bg-light">
+
+    <div class="container py-4">
+
+        <div class="text-center mb-5">
+
+            <span class="text-primary fw-semibold">
+                WHY CHOOSE US
+            </span>
+
+            <h2 class="fw-bold mt-2">
+                Everything You Need in One Place
+            </h2>
+
+            <p class="text-muted">
+                Designed to make the admission process simple, secure,
+                and convenient.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- Feature 1 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card feature-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </div>
+
+                        <h5 class="fw-bold mt-4">
+                            Easy Registration
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Register your admission details through
+                            a simple and user-friendly form.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Feature 2 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card feature-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <h5 class="fw-bold mt-4">
+                            Multiple Courses
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Explore different academic programs and
+                            choose the course that suits your goals.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Feature 3 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card feature-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <h5 class="fw-bold mt-4">
+                            Student Management
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Manage student admission information
+                            efficiently from one platform.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Feature 4 -->
+
+            <div class="col-md-6 col-lg-3">
+
+                <div class="card feature-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body text-center p-4">
+
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+
+                        <h5 class="fw-bold mt-4">
+                            Secure Access
+                        </h5>
+
+                        <p class="text-muted mb-0">
+                            Role-based access helps keep student
+                            information protected.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT SECTION ================= -->
+
+<section class="py-5">
+
+    <div class="container py-4">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <div class="about-box">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <span>ADMISSION PORTAL</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <span class="text-primary fw-semibold">
+                    ABOUT OUR PORTAL
+                </span>
+
+                <h2 class="fw-bold mt-2 mb-4">
+                    Making Student Admissions
+                    Simple and Efficient
+                </h2>
+
+                <p class="text-muted">
+                    Admission Portal provides a convenient platform
+                    for students to register and manage their admission
+                    information online.
+                </p>
+
+                <p class="text-muted">
+                    Our system provides a secure role-based environment
+                    where students can manage their own information while
+                    authorized admission staff can efficiently manage
+                    student records.
+                </p>
+
+                <a href="/admission/abouts/"
+                   class="btn btn-outline-primary px-4 mt-2">
+                    Learn More
+                    <i class="fa-solid fa-arrow-right ms-2"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= COURSES SECTION ================= -->
+
+<section class="py-5 bg-light">
+
+    <div class="container py-4">
+
+        <div class="text-center mb-5">
+
+            <span class="text-primary fw-semibold">
+                EXPLORE PROGRAMS
+            </span>
+
+            <h2 class="fw-bold mt-2">
+                Our Popular Courses
+            </h2>
+
+            <p class="text-muted">
+                Choose a program and take the next step toward your
+                academic and professional goals.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- BCA -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            BCA
+                        </h4>
+
+                        <p class="text-muted">
+                            Bachelor of Computer Applications with
+                            a focus on computer science and software
+                            development.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BBA -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            BBA
+                        </h4>
+
+                        <p class="text-muted">
+                            Bachelor of Business Administration designed
+                            to develop management and business skills.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BSC -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            B.Sc
+                        </h4>
+
+                        <p class="text-muted">
+                            Build a strong foundation in science,
+                            analytical thinking, and practical knowledge.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MCA -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            MCA
+                        </h4>
+
+                        <p class="text-muted">
+                            Master of Computer Applications for advanced
+                            learning in software and technology.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MBA -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-briefcase"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            MBA
+                        </h4>
+
+                        <p class="text-muted">
+                            Develop leadership, management, and strategic
+                            business skills for your professional career.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Explore -->
+
+            <div class="col-md-6 col-lg-4">
+
+                <div class="card course-card h-100 border-0 shadow-sm">
+
+                    <div class="card-body p-4 d-flex flex-column">
+
+                        <div class="course-icon">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+
+                        <h4 class="fw-bold mt-4">
+                            Explore More
+                        </h4>
+
+                        <p class="text-muted">
+                            Discover all available courses and find
+                            the right program for your future.
+                        </p>
+
+                        <a href="/admission/courses/"
+                           class="btn btn-outline-primary mt-auto">
+                            View Courses
+                            <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CALL TO ACTION ================= -->
+
+<section class="cta-section text-white py-5">
+
+    <div class="container text-center py-4">
+
+        <i class="fa-solid fa-graduation-cap cta-icon mb-3"></i>
+
+        <h2 class="fw-bold">
+            Ready to Start Your Journey?
+        </h2>
+
+        <p class="lead mb-4">
+            Take the first step toward your academic future today.
+        </p>
+
+        {% if user.is_authenticated %}
+
+            <a href="/admission/register/"
+               class="btn btn-light btn-lg px-5">
+                <i class="fa-solid fa-user-plus me-2"></i>
+                Register Now
+            </a>
+
+        {% else %}
+
+            <a href="/admission/signUpForm/"
+               class="btn btn-light btn-lg px-5">
+                <i class="fa-solid fa-user-plus me-2"></i>
+                Create Account
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+<!-- ================= PAGE STYLES ================= -->
+
+<style>
+
+    /* Hero */
+
+    .hero-section {
+        background-image:
+            linear-gradient(
+                rgba(15, 23, 42, 0.88),
+                rgba(15, 23, 42, 0.88)
+            ),
+            url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80");
+
+        background-size: cover;
+        background-position: center;
+        min-height: 650px;
+        display: flex;
+        align-items: center;
+    }
+
+    .min-vh-75 {
+        min-height: 600px;
+    }
+
+
+    /* Hero Icon */
+
+    .hero-icon-card {
+        padding: 55px 30px;
+        border: 1px solid rgba(255,255,255,0.2);
+        background: rgba(255,255,255,0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+    }
+
+    .hero-icon-card i {
+        font-size: 100px;
+    }
+
+
+    /* Feature Cards */
+
+    .feature-card {
+        transition: all 0.3s ease;
+        border-radius: 15px;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.12) !important;
+    }
+
+    .feature-icon,
+    .course-icon {
+        width: 65px;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        border-radius: 15px;
+        background: #e9f2ff;
+        color: #0d6efd;
+        font-size: 28px;
+    }
+
+
+    /* About */
+
+    .about-box {
+        min-height: 330px;
+        border-radius: 25px;
+        background: linear-gradient(
+            135deg,
+            #0d6efd,
+            #084298
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 20px 40px rgba(13,110,253,0.2);
+    }
+
+    .about-box i {
+        font-size: 100px;
+        margin-bottom: 20px;
+    }
+
+    .about-box span {
+        letter-spacing: 3px;
+        font-weight: 600;
+    }
+
+
+    /* Course Cards */
+
+    .course-card {
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+        transform: translateY(-6px);
+    }
+
+    .course-card .course-icon {
+        margin-left: 0;
+    }
+
+
+    /* CTA */
+
+    .cta-section {
+        background: linear-gradient(
+            135deg,
+            #0d6efd,
+            #084298
+        );
+    }
+
+    .cta-icon {
+        font-size: 55px;
+    }
+
+
+    /* Mobile */
+
+    @media (max-width: 768px) {
+
+        .hero-section {
+            min-height: 600px;
+        }
+
+        .min-vh-75 {
+            min-height: 550px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+        }
+
+    }
+
+</style>
+
+{% endblock %}
