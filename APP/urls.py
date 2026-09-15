@@ -23,7 +23,7 @@ urlpatterns = [
     path('login/',views.loginUser),
     path('logout/',views.logoutUser),
 
-    path('search/',views.searchingStudents)
+    path('search/',views.searchingStudents),
 
     path('initial-setup/', views.production_setup),
 ]
