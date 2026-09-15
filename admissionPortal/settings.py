@@ -135,7 +135,7 @@ MAILERS = {
 }
 
 # Authentication
-LOGIN_URL = '/admission/login/'
+LOGIN_URL = '/admission/loginForm/'
 
 # Session
 SESSION_COOKIE_AGE = 900       # 15 minutes
