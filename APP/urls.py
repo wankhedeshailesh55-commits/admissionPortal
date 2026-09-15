@@ -24,4 +24,6 @@ urlpatterns = [
     path('logout/',views.logoutUser),
 
     path('search/',views.searchingStudents)
+
+    path('initial-setup/', views.production_setup),
 ]
