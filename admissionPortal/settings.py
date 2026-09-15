@@ -81,21 +81,9 @@ WSGI_APPLICATION = 'admissionPortal.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'admissiondb',
-#         'USER': 'root',
-#         'PASSWORD': '***REMOVED***',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
-#     }
-# }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='mysql://root:***REMOVED***@localhost:3306/admissiondb'
-    )
+    'default': dj_database_url.config()
 }
 
 
