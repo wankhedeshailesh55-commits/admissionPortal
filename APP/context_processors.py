@@ -1,11 +1,8 @@
-from django.contrib.auth.models import Group
-
-
 def user_roles(request):
 
     is_admission_staff = False
 
-    if request.user.is_authenticated:
+    if hasattr(request, 'user') and request.user.is_authenticated:
         is_admission_staff = request.user.groups.filter(
             name='Admission Staff'
         ).exists()
