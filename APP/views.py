@@ -1,16 +1,11 @@
-import os
+
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.models import User, Group, Permission
-from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ValidationError
-from django.contrib.auth.password_validation import validate_password
-from django.db import transaction
-from django.http import HttpResponseForbidden
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import Q
-from django.views.decorators.http import require_POST, require_http_methods
+from django.views.decorators.http import require_POST
 
 from .models import Student
 
@@ -345,102 +340,4 @@ def searchingStudents(request):
         request,
         'viewAllUsers.html',
         context
-    )
-
-
-
-
-
-@require_http_methods(["GET", "POST"])
-def production_setup(request):
-
-    # Only allow setup when no superuser exists yet
-    if User.objects.filter(is_superuser=True).exists():
-        return HttpResponseForbidden(
-            "Production setup has already been completed."
-        )
-
-    if request.method == "GET":
-        return render(request, "production_setup.html")
-
-    # Check secret setup key
-    setup_key = request.POST.get("setup_key", "")
-    expected_key = os.environ.get("PRODUCTION_SETUP_KEY", "")
-
-    if not expected_key or setup_key != expected_key:
-        return HttpResponseForbidden("Invalid setup key.")
-
-    username = request.POST.get("username", "").strip()
-    email = request.POST.get("email", "").strip()
-    password = request.POST.get("password", "")
-    confirm_password = request.POST.get("confirm_password", "")
-
-    if not username or not email or not password:
-        return render(
-            request,
-            "production_setup.html",
-            {"error": "All fields are required."}
-        )
-
-    if password != confirm_password:
-        return render(
-            request,
-            "production_setup.html",
-            {"error": "Passwords do not match."}
-        )
-
-    if User.objects.filter(username=username).exists():
-        return render(
-            request,
-            "production_setup.html",
-            {"error": "Username already exists."}
-        )
-
-    try:
-        validate_password(password)
-    except ValidationError as e:
-        return render(
-            request,
-            "production_setup.html",
-            {"error": " ".join(e.messages)}
-        )
-
-    with transaction.atomic():
-
-        # Create production superuser
-        User.objects.create_superuser(
-            username=username,
-            email=email,
-            password=password
-        )
-
-        # Create Admission Staff group
-        group, created = Group.objects.get_or_create(
-            name="Admission Staff"
-        )
-
-        # Give Student permissions to the group
-        content_type = ContentType.objects.get_for_model(Student)
-
-        permissions = Permission.objects.filter(
-            content_type=content_type,
-            codename__in=[
-                "add_student",
-                "change_student",
-                "delete_student",
-                "view_student",
-            ]
-        )
-
-        group.permissions.set(permissions)
-
-    return render(
-        request,
-        "production_setup.html",
-        {
-            "success": (
-                "Production setup completed successfully. "
-                "You can now login to Django Admin."
-            )
-        }
     )
